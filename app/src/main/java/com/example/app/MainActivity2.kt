@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
@@ -17,10 +18,10 @@ import com.google.firebase.auth.auth
 class MainActivity2 : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
+    private lateinit var googleSignInClient: GoogleSignInClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
         Log.i("MyTag", "MainActivity : OnCreate")
         auth = Firebase.auth
         validateAndSignIn()
@@ -29,9 +30,10 @@ class MainActivity2 : AppCompatActivity() {
     private fun validateAndSignIn() {
         if (auth.currentUser == null) {
             Log.i("MyTag", "Current user is null")
-            startActivity(Intent(this, EmailPasswordActivity::class.java))
-            Log.i("MyTag", "Starting EmailPasswordActivity")
+            startActivity(Intent(this, UIActivity::class.java))
+            Log.i("MyTag", "Starting UIActivity")
         } else {
+            setContentView(R.layout.activity_main)
             Log.i("MyTag", "Current user is authenticated")
             val greetingTextView = findViewById<TextView>(R.id.tvHello)
             val inputField = findViewById<EditText>(R.id.etName)
@@ -54,11 +56,6 @@ class MainActivity2 : AppCompatActivity() {
                     inputField.text.clear()
                     offersButton.visibility = VISIBLE
                 }
-            }
-            offersButton.setOnClickListener {
-                val intent = Intent(this, SecondActivity::class.java)
-                intent.putExtra("USER", enteredName)
-                startActivity(intent)
             }
         }
     }
@@ -89,11 +86,24 @@ class MainActivity2 : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         auth.signOut()
+        signOutFromGoogle()
         Log.i("MyTag", "MainActivity : OnDestroy")
     }
 
     override fun onRestart() {
         super.onRestart()
         Log.i("MyTag", "MainActivity : OnRestart")
+    }
+    private fun signOutFromGoogle() {
+        googleSignInClient.signOut().addOnCompleteListener(this) {
+            // Sign-out successful
+            // You can redirect the user to the sign-in screen or perform any other actions
+            // For example:
+            // startActivity(Intent(this, SignInActivity::class.java))
+            // finish()
+        }.addOnFailureListener(this) { e ->
+            // An error occurred while signing out
+            Log.e("MyTag", "Sign out failed", e)
+        }
     }
 }

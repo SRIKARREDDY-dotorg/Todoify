@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools" >
 
     <application
         android:allowBackup="true"
@@ -13,15 +13,18 @@
         android:theme="@style/Theme.App"
         tools:targetApi="31">
         <activity
+            android:name=".GoogleAuthActivity"
+            android:exported="false" />
+        <activity
             android:name=".EmailPasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".SecondActivity"
+            android:name=".UIActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity2"
             android:exported="true"
-            android:theme="@style/Theme.App">
+            android:theme="@style/Theme.App" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

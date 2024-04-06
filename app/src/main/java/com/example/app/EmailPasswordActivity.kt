@@ -11,8 +11,10 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import android.widget.ToggleButton
+import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.auth
 
 class EmailPasswordActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
@@ -24,7 +26,7 @@ class EmailPasswordActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        auth = FirebaseAuth.getInstance()
+        auth = Firebase.auth
         Log.i("MyTag", "EmailPasswordActivity : OnCreate")
         setContentView(R.layout.activity_mainz)
 
@@ -109,7 +111,6 @@ class EmailPasswordActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "signInWithEmail:success")
-                    sendEmailVerification()
                     val user = auth.currentUser
                     updateUI(user)
                 } else {
