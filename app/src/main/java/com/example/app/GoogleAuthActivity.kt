@@ -32,7 +32,6 @@ class GoogleAuthActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.i("MyTag", "Entered GoogleAuthActivity")
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_google_auth)
         gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
@@ -41,7 +40,6 @@ class GoogleAuthActivity : AppCompatActivity() {
         googleSignInClient = GoogleSignIn.getClient(this, gso)
         auth = Firebase.auth
         signIn()
-//        signInWithGoogle()
     }
 
     private fun signIn() {

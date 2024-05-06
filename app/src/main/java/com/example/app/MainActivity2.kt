@@ -30,8 +30,8 @@ class MainActivity2 : AppCompatActivity() {
     private fun validateAndSignIn() {
         if (auth.currentUser == null) {
             Log.i("MyTag", "Current user is null")
-            startActivity(Intent(this, UIActivity::class.java))
-            Log.i("MyTag", "Starting UIActivity")
+            startActivity(Intent(this, AuthActivity::class.java))
+            Log.i("MyTag", "Starting AuthActivity")
         } else {
             setContentView(R.layout.activity_main)
             Log.i("MyTag", "Current user is authenticated")

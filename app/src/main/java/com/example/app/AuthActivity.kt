@@ -7,14 +7,14 @@ import android.util.Log
 import android.widget.Button
 import com.google.android.gms.common.SignInButton
 
-class UIActivity : AppCompatActivity() {
+class AuthActivity : AppCompatActivity() {
 
     private lateinit var buttonEmailSignIn : Button
     private lateinit var buttonGoogleSignIn : SignInButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.i("MyTag", "UIActivity : OnCreate")
+        Log.i("MyTag", "AuthActivity : OnCreate")
         setContentView(R.layout.activity_ui)
         buttonEmailSignIn = findViewById(R.id.button_email_sign_in)
         buttonGoogleSignIn = findViewById(R.id.button_google_sign_in)
@@ -28,31 +28,31 @@ class UIActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        Log.i("MyTag", "SecondActivity : OnStart")
+        Log.i("MyTag", "AuthActivity : OnStart")
     }
 
     override fun onResume() {
         super.onResume()
-        Log.i("MyTag", "SecondActivity : OnResume")
+        Log.i("MyTag", "AuthActivity : OnResume")
     }
 
     override fun onPause() {
         super.onPause()
-        Log.i("MyTag", "SecondActivity : OnPause")
+        Log.i("MyTag", "AuthActivity : OnPause")
     }
 
     override fun onStop() {
         super.onStop()
-        Log.i("MyTag", "SecondActivity : OnStop")
+        Log.i("MyTag", "AuthActivity : OnStop")
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        Log.i("MyTag", "SecondActivity : OnDestroy")
+        Log.i("MyTag", "AuthActivity : OnDestroy")
     }
 
     override fun onRestart() {
         super.onRestart()
-        Log.i("MyTag", "SecondActivity : OnRestart")
+        Log.i("MyTag", "AuthActivity : OnRestart")
     }
 }

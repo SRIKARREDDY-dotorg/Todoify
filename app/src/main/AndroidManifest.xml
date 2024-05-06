@@ -19,7 +19,7 @@
             android:name=".EmailPasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".UIActivity"
+            android:name=".AuthActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity2"
