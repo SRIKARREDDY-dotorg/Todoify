@@ -15,7 +15,7 @@ import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 
-class MainActivity2 : AppCompatActivity() {
+class MainActivity2 : BaseActivity() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
@@ -25,6 +25,10 @@ class MainActivity2 : AppCompatActivity() {
         Log.i("MyTag", "MainActivity : OnCreate")
         auth = Firebase.auth
         validateAndSignIn()
+    }
+
+    override fun getLayoutResourceId(): Int {
+        return R.layout.activity_main
     }
 
     private fun validateAndSignIn() {

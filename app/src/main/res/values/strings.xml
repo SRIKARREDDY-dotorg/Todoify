@@ -1,5 +1,7 @@
 <resources>
-    <string name="app_name">App</string>
+    <string name="app_name">Todoify</string>
     <string name="hello_message">Hello from Android!</string>
     <string name="default_web_client_id">233727236070-fg6lv01mv639q6v4hnj95oss2sc10271.apps.googleusercontent.com</string>
+    <string name="navigation_drawer_open">open</string>
+    <string name="navigation_drawer_close">close</string>
 </resources>

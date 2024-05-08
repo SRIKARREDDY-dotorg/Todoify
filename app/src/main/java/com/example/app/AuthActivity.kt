@@ -7,7 +7,7 @@ import android.util.Log
 import android.widget.Button
 import com.google.android.gms.common.SignInButton
 
-class AuthActivity : AppCompatActivity() {
+class AuthActivity : BaseActivity() {
 
     private lateinit var buttonEmailSignIn : Button
     private lateinit var buttonGoogleSignIn : SignInButton
@@ -15,7 +15,7 @@ class AuthActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.i("MyTag", "AuthActivity : OnCreate")
-        setContentView(R.layout.activity_ui)
+//        setContentView(R.layout.activity_ui)
         buttonEmailSignIn = findViewById(R.id.button_email_sign_in)
         buttonGoogleSignIn = findViewById(R.id.button_google_sign_in)
         buttonEmailSignIn.setOnClickListener {
@@ -24,6 +24,10 @@ class AuthActivity : AppCompatActivity() {
         buttonGoogleSignIn.setOnClickListener {
             startActivity(Intent(this, GoogleAuthActivity::class.java))
         }
+    }
+
+    override fun getLayoutResourceId(): Int {
+        TODO("Not yet implemented")
     }
 
     override fun onStart() {
