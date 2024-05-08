@@ -21,6 +21,7 @@ abstract class BaseActivity : AppCompatActivity() {
         setContentView(R.layout.activity_ui)
         val toolbar: MaterialToolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+        // TODO bug fix for support title bar
         supportActionBar?.title = ""
         drawerLayout = findViewById(R.id.drawer_layout)
         navView = findViewById(R.id.nav_view)
@@ -41,7 +42,10 @@ abstract class BaseActivity : AppCompatActivity() {
                     // Handle Home click
                     Log.i("MyTag", "Home clicked")
 
-                    Toast.makeText(baseContext, "Home Clicked", Toast.LENGTH_SHORT).show()
+                    Handler().postDelayed({
+                        Toast.makeText(this, "Home Clicked", Toast.LENGTH_SHORT).show()
+                    }, 100)
+
                     // Close the drawer after handling the click
                     drawerLayout.closeDrawers()
                     true
@@ -49,8 +53,10 @@ abstract class BaseActivity : AppCompatActivity() {
                 R.id.nav_sign_out -> {
                     // Handle Sign Out click
                     Log.i("MyTag", "Sign Out Clicked")
+                    Handler().postDelayed({
+                        Toast.makeText(this, "Sign Out Clicked", Toast.LENGTH_SHORT).show()
+                    }, 100)
 
-                    Toast.makeText(baseContext, "Sign Out Clicked", Toast.LENGTH_SHORT).show()
 
                     // Close the drawer after handling the click
                     drawerLayout.closeDrawers()
