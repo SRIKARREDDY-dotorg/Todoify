@@ -4,10 +4,13 @@ import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.drawerlayout.widget.DrawerLayout
+import com.example.app.constants.CommonConstants.TAG
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.navigation.NavigationView
 
@@ -17,8 +20,14 @@ abstract class BaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.i("MyTag", "BaseActivity : OnCreate")
-        setContentView(R.layout.activity_ui)
+        Log.i(TAG, "BaseActivity : OnCreate")
+        setContentView(R.layout.drawer_content)
+        val layoutContainer = findViewById<FrameLayout>(R.id.layout_container)
+
+        layoutContainer?.let {
+            layoutInflater.inflate(getLayoutResourceId(), it)
+        }
+
         val toolbar: MaterialToolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         // TODO bug fix for support title bar
@@ -40,11 +49,11 @@ abstract class BaseActivity : AppCompatActivity() {
             when (menuItem.itemId) {
                 R.id.nav_home -> {
                     // Handle Home click
-                    Log.i("MyTag", "Home clicked")
+                    Log.i(TAG, "Home clicked")
 
                     Handler().postDelayed({
                         Toast.makeText(this, "Home Clicked", Toast.LENGTH_SHORT).show()
-                    }, 100)
+                    }, 250)
 
                     // Close the drawer after handling the click
                     drawerLayout.closeDrawers()
@@ -52,11 +61,10 @@ abstract class BaseActivity : AppCompatActivity() {
                 }
                 R.id.nav_sign_out -> {
                     // Handle Sign Out click
-                    Log.i("MyTag", "Sign Out Clicked")
+                    Log.i(TAG, "Sign Out Clicked")
                     Handler().postDelayed({
                         Toast.makeText(this, "Sign Out Clicked", Toast.LENGTH_SHORT).show()
-                    }, 100)
-
+                    }, 250)
 
                     // Close the drawer after handling the click
                     drawerLayout.closeDrawers()
@@ -64,7 +72,7 @@ abstract class BaseActivity : AppCompatActivity() {
                 }
                 else -> {
                     // Close the drawer after handling the click
-                    Log.i("MyTag", "Nothing to close")
+                    Log.i(TAG, "Nothing to close")
                     drawerLayout.closeDrawers()
                     false
                 }

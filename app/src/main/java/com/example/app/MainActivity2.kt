@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import com.example.app.constants.CommonConstants.TAG
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
@@ -22,7 +23,7 @@ class MainActivity2 : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.i("MyTag", "MainActivity : OnCreate")
+        Log.i(TAG, "MainActivity : OnCreate")
         auth = Firebase.auth
         validateAndSignIn()
     }
@@ -33,12 +34,12 @@ class MainActivity2 : BaseActivity() {
 
     private fun validateAndSignIn() {
         if (auth.currentUser == null) {
-            Log.i("MyTag", "Current user is null")
+            Log.i(TAG, "Current user is null")
             startActivity(Intent(this, AuthActivity::class.java))
-            Log.i("MyTag", "Starting AuthActivity")
+            Log.i(TAG, "Starting AuthActivity")
         } else {
             setContentView(R.layout.activity_main)
-            Log.i("MyTag", "Current user is authenticated")
+            Log.i(TAG, "Current user is authenticated")
             val greetingTextView = findViewById<TextView>(R.id.tvHello)
             val inputField = findViewById<EditText>(R.id.etName)
             val submitButton = findViewById<Button>(R.id.btnSubmit)
@@ -66,24 +67,24 @@ class MainActivity2 : BaseActivity() {
 
     override fun onStart() {
         super.onStart()
-        Log.i("MyTag", "MainActivity : OnStart")
+        Log.i(TAG, "MainActivity : OnStart")
         validateAndSignIn()
     }
 
     override fun onResume() {
         super.onResume()
-        Log.i("MyTag", "MainActivity : OnResume")
+        Log.i(TAG, "MainActivity : OnResume")
         validateAndSignIn()
     }
 
     override fun onPause() {
         super.onPause()
-        Log.i("MyTag", "MainActivity : OnPause")
+        Log.i(TAG, "MainActivity : OnPause")
     }
 
     override fun onStop() {
         super.onStop()
-        Log.i("MyTag", "MainActivity : OnStop")
+        Log.i(TAG, "MainActivity : OnStop")
         auth.signOut()
     }
 
@@ -91,12 +92,12 @@ class MainActivity2 : BaseActivity() {
         super.onDestroy()
         auth.signOut()
         signOutFromGoogle()
-        Log.i("MyTag", "MainActivity : OnDestroy")
+        Log.i(TAG, "MainActivity : OnDestroy")
     }
 
     override fun onRestart() {
         super.onRestart()
-        Log.i("MyTag", "MainActivity : OnRestart")
+        Log.i(TAG, "MainActivity : OnRestart")
     }
     private fun signOutFromGoogle() {
         googleSignInClient.signOut().addOnCompleteListener(this) {
@@ -107,7 +108,7 @@ class MainActivity2 : BaseActivity() {
             // finish()
         }.addOnFailureListener(this) { e ->
             // An error occurred while signing out
-            Log.e("MyTag", "Sign out failed", e)
+            Log.e(TAG, "Sign out failed", e)
         }
     }
 }

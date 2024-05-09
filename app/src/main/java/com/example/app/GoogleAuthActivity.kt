@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import com.example.app.constants.CommonConstants.TAG
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -30,7 +31,7 @@ class GoogleAuthActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Log.i("MyTag", "Entered GoogleAuthActivity")
+        Log.i(TAG, "Entered GoogleAuthActivity")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_google_auth)
         gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -57,11 +58,11 @@ class GoogleAuthActivity : AppCompatActivity() {
             try {
                 // Google Sign In was successful, authenticate with Firebase
                 val account = task.getResult(ApiException::class.java)!!
-                Log.d("MyTag", "firebaseAuthWithGoogle:" + account.id)
+                Log.d(TAG, "firebaseAuthWithGoogle:" + account.id)
                 firebaseAuthWithGoogle(account.idToken!!)
             } catch (e: ApiException) {
                 // Google Sign In failed, update UI appropriately
-                Log.w("MyTag", "Google sign in failed", e)
+                Log.w(TAG, "Google sign in failed", e)
             }
         }
     }
@@ -74,12 +75,12 @@ class GoogleAuthActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
-                    Log.d("MyTag", "signInWithCredential:success")
+                    Log.d(TAG, "signInWithCredential:success")
                     val user = auth.currentUser
                     startActivity(Intent(this, MainActivity2::class.java))
                 } else {
                     // If sign in fails, display a message to the user.
-                    Log.w("MyTag", "signInWithCredential:failure", task.exception)
+                    Log.w(TAG, "signInWithCredential:failure", task.exception)
                 }
             }
     }
@@ -106,7 +107,7 @@ class GoogleAuthActivity : AppCompatActivity() {
             // finish()
         }.addOnFailureListener(this) { e ->
             // An error occurred while signing out
-            Log.e("MyTag", "Sign out failed", e)
+            Log.e(TAG, "Sign out failed", e)
         }
     }
 

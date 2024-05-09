@@ -11,6 +11,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import android.widget.ToggleButton
+import com.example.app.constants.CommonConstants.TAG
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -27,7 +28,7 @@ class EmailPasswordActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         auth = Firebase.auth
-        Log.i("MyTag", "EmailPasswordActivity : OnCreate")
+        Log.i(TAG, "EmailPasswordActivity : OnCreate")
         setContentView(R.layout.activity_mainz)
 
         buttonSignUp = findViewById(R.id.buttonSignUp)
@@ -172,9 +173,5 @@ class EmailPasswordActivity : AppCompatActivity() {
         // Clear the input fields
         editTextEmail.text = null
         editTextPassword.text = null
-    }
-
-    companion object {
-        private const val TAG = "EmailPassword"
     }
 }
