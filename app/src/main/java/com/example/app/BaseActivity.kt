@@ -3,12 +3,10 @@ package com.example.app
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
-import android.view.View
 import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.app.constants.CommonConstants.TAG
 import com.google.android.material.appbar.MaterialToolbar
@@ -37,7 +35,9 @@ abstract class BaseActivity : AppCompatActivity() {
 
         // Set up the hamburger button to open/close the drawer
         val toggle = ActionBarDrawerToggle(
-            this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
+            this, drawerLayout, toolbar,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
         )
 
         drawerLayout.addDrawerListener(toggle)
@@ -66,6 +66,7 @@ abstract class BaseActivity : AppCompatActivity() {
                         Toast.makeText(this, "Sign Out Clicked", Toast.LENGTH_SHORT).show()
                     }, 250)
 
+                    signOut()
                     // Close the drawer after handling the click
                     drawerLayout.closeDrawers()
                     true
@@ -80,6 +81,7 @@ abstract class BaseActivity : AppCompatActivity() {
         }
     }
 
+    abstract fun signOut()
     // Abstract method to be implemented by subclasses to provide layout resource id
     abstract fun getLayoutResourceId(): Int
 }

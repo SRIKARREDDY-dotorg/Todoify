@@ -1,7 +1,6 @@
 package com.example.app
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View.INVISIBLE
@@ -28,6 +27,17 @@ class MainActivity2 : BaseActivity() {
         validateAndSignIn()
     }
 
+    override fun signOut() {
+        if(auth.currentUser != null) {
+            auth.signOut()
+            Log.i(TAG, "Current user is not null")
+            startActivity(Intent(this, AuthActivity::class.java))
+            Log.i(TAG, "Starting AuthActivity")
+        }
+        signOutFromGoogle()
+        Log.i(TAG, "Signed out from app")
+    }
+
     override fun getLayoutResourceId(): Int {
         return R.layout.activity_main
     }
@@ -38,7 +48,6 @@ class MainActivity2 : BaseActivity() {
             startActivity(Intent(this, AuthActivity::class.java))
             Log.i(TAG, "Starting AuthActivity")
         } else {
-            setContentView(R.layout.activity_main)
             Log.i(TAG, "Current user is authenticated")
             val greetingTextView = findViewById<TextView>(R.id.tvHello)
             val inputField = findViewById<EditText>(R.id.etName)
@@ -99,16 +108,26 @@ class MainActivity2 : BaseActivity() {
         super.onRestart()
         Log.i(TAG, "MainActivity : OnRestart")
     }
+
     private fun signOutFromGoogle() {
+        val myApplication = application as MyApplication
+        if(myApplication.googleSignInClient == null) {
+            return
+        }
+        googleSignInClient = myApplication.googleSignInClient!!
+        Log.i(TAG, "Signing out from Google")
         googleSignInClient.signOut().addOnCompleteListener(this) {
-            // Sign-out successful
-            // You can redirect the user to the sign-in screen or perform any other actions
-            // For example:
-            // startActivity(Intent(this, SignInActivity::class.java))
-            // finish()
+            Log.i(TAG, "Signed out from Google")
+            Toast.makeText(
+                this@MainActivity2,
+                "Signed out from Google",
+                Toast.LENGTH_SHORT
+            ).show()
+            startActivity(Intent(this, AuthActivity::class.java))
         }.addOnFailureListener(this) { e ->
             // An error occurred while signing out
             Log.e(TAG, "Sign out failed", e)
         }
     }
+
 }

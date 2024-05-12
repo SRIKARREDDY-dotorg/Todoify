@@ -1,24 +1,17 @@
 package com.example.app
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.app.constants.CommonConstants.TAG
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.tasks.Task
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.auth
 
 
@@ -26,7 +19,6 @@ class GoogleAuthActivity : AppCompatActivity() {
 
     private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var gso : GoogleSignInOptions
-    private lateinit var task : Task<GoogleSignInAccount>
     private val RC_SIGN_IN = 1001
     private lateinit var auth: FirebaseAuth
 
@@ -39,6 +31,8 @@ class GoogleAuthActivity : AppCompatActivity() {
             .requestEmail()
             .build()
         googleSignInClient = GoogleSignIn.getClient(this, gso)
+        val myApplication = application as MyApplication
+        myApplication.googleSignInClient = googleSignInClient
         auth = Firebase.auth
         signIn()
     }
@@ -90,12 +84,10 @@ class GoogleAuthActivity : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
-        signOutFromGoogle()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        signOutFromGoogle()
     }
 
     private fun signOutFromGoogle() {

@@ -1,10 +1,10 @@
 package com.example.app
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.Toast
 import com.example.app.constants.CommonConstants.TAG
 import com.google.android.gms.common.SignInButton
 
@@ -24,6 +24,11 @@ class AuthActivity : BaseActivity() {
         buttonGoogleSignIn.setOnClickListener {
             startActivity(Intent(this, GoogleAuthActivity::class.java))
         }
+    }
+
+    override fun signOut() {
+        Log.i(TAG, "No need to sign out")
+        Toast.makeText(this, "Already signed out", Toast.LENGTH_SHORT).show()
     }
 
     override fun getLayoutResourceId(): Int {
